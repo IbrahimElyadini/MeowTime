@@ -1,28 +1,47 @@
 import './Login.css';
-
+import { useState } from 'react';
 
 
 function Login() {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      // fetch avec post pour envoyer les données et récupérer le token
+      console.log('Username:', username);
+      console.log('Password:', password);
+    };
+  
   return (
-    <div className="Login">
-        <main className="Login-main">
-            <h2>Login</h2>
-            <form>
-                <label>
-                    Username:
-                    <input type="text" name="username" />
-                </label>
-                <br />
-                <label>
-                    Password:
-                    <input type="password" name="password" />
-                </label>
-                <br />
-                <button type="submit">Login</button>
-            </form>
-        </main>
-    </div>
-  );
+    <div className="login-container">
+    <main className="login-main">
+      <h2>Login</h2>
+      <form className="login-form" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <button type="submit" className="login-button">Login</button>
+      </form>
+    </main>
+  </div>  );
 }
 
 export default Login;

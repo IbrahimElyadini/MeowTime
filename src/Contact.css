@@ -1,8 +1,14 @@
+.contact-wrapper {
+    background-color: #f5f0e6;
+    min-height: calc(100vh);
+  }
+  
 .contact-container {
     max-width: 700px;
     margin: 0 auto;
     padding: 40px 20px;
     font-family: 'Segoe UI', sans-serif;
+    
   }
   
   .contact-container h2 {

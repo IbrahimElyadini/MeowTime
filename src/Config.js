@@ -1,0 +1,2 @@
+export const SERVER_IP = 'ADDRESSE_IP_DU_SERVEUR';
+export const SERVER_PORT = 'PORT_DU_SERVEUR';

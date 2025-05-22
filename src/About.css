@@ -1,4 +1,9 @@
-/* About.css */
+.about-wrapper {
+    background-color: #f9f5f0;
+    min-height: 100vh;
+  }
+  
+
 .about-container {
     max-width: 800px;
     margin: 0 auto;

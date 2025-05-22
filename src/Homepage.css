@@ -1,4 +1,8 @@
-/* Homepage.css */
+.Homepage-wrapper {
+    background-color: #f9f5f0;
+    min-height: 100vh;
+  }
+
 .Homepage {
     padding: 40px 20px;
     font-family: 'Segoe UI', sans-serif;
@@ -32,6 +36,7 @@
     gap: 15px;
     flex-wrap: wrap;
     margin-top: 20px;
+    margin-bottom: 100px;
     justify-content: center;
   }
   

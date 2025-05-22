@@ -1,8 +1,13 @@
-/* Header.css */
 .header {
     background-color: #dfa96c;
     padding: 20px;
     text-align: center;
+    position: fixed;
+    top: 0;                 /* Aligne tout en haut */
+    left: 0;
+    width: 100%;            /* Prend toute la largeur */
+    z-index: 1000;          /* S’assure qu’il passe au-dessus du contenu */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optionnel : petit effet de profondeur */
   }
   
   .header h1 {
