@@ -7,7 +7,8 @@
 - L'utilisateur planifie des repas depuis l'interface web.
 - À l'heure prévue, l'application envoie une requête HTTP à l'ESP32 via le réseau local ou Internet.
 - L'ESP32 actionne un circuit pour distribuer la nourriture à Mimi 🐱.
-![Mon chat Mimi](site-web/src/assets/mimi5.jpg)
+
+<img src="site-web/src/assets/mimi5.jpg" alt="Mon chat Mimi" width="200"/>
 
 ## 📦 Technologies
 
