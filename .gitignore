@@ -1,9 +1,6 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # ignore node/grunt dependency directories
 /site-web/node_modules/
 /serveur/node_modules/
-
 
 # dependencies
 /node_modules
@@ -17,6 +14,8 @@
 /build
 
 # misc
+/serveur/.env
+/esp32/main/secrets.h
 .DS_Store
 .env.local
 .env.development.local

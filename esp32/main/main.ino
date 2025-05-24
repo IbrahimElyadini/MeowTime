@@ -1,10 +1,18 @@
 #include <WiFi.h>
+#include <ESP32Servo.h>
+#include "secrets.h"
+// secrets.h devrait être dans le même folder et avoir deux constantes ssid et password respectif à votre réseau
 
-// Remplace par tes identifiants Wi-Fi
-const char* ssid = "MON_SSID";
-const char* password = "MON_MOT_DE_PASSE";
-
+// Serveur sur l'ESP32
 WiFiServer server(80);  // Création du serveur sur le port 80
+
+// Servo
+#define SERVO_PIN    27
+#define OPEN_TIME    5
+#define CLOSE_TIME   5
+
+Servo servo1;
+
 
 void setup() {
   Serial.begin(115200);
@@ -28,7 +36,23 @@ void setup() {
   Serial.print("Adresse IP : ");
   Serial.println(WiFi.localIP());
 
+  servo1.attach(SERVO_PIN);
+
   server.begin();
+}
+
+void openThenClose() {
+  Serial.println("Ouverture du servo...");
+  for (int angle = 0; angle <= 180; angle++) {
+    servo1.write(angle);
+    delay(OPEN_TIME);
+  }
+
+  Serial.println("Fermeture du servo...");
+  for (int angle = 180; angle >= 0; angle--) {
+    servo1.write(angle);
+    delay(CLOSE_TIME);
+  }
 }
 
 void loop() {
@@ -37,17 +61,30 @@ void loop() {
   if (client) {
     Serial.println("Client connecté !");
     String request = client.readStringUntil('\r');
-    Serial.println(request);
-    client.clear();
+    Serial.println("Requête reçue : " + request);
+    client.read(); // lecture du \n qui suit
 
-    // Réponse HTTP simple
+    // --- GESTION REQUÊTE ---
+    bool triggered = false;
+    if (request.indexOf("POST /feed") >= 0) {
+      openThenClose();
+      triggered = true;
+    }
+
+    // --- REPONSE HTTP ---
     client.println("HTTP/1.1 200 OK");
     client.println("Content-type:text/html");
+    client.println("Access-Control-Allow-Origin: *");
+    client.println("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+    client.println("Access-Control-Allow-Headers: Content-Type");
     client.println();
-    client.println("<!DOCTYPE html><html><body><h1>ESP32 connected !</h1></body></html>");
+    if (triggered) {
+      client.println("<html><body><h1>Servo active 🐱🍽️</h1></body></html>");
+    } else {
+      client.println("<html><body><h1>ESP32 operationnel</h1></body></html>");
+    }
     client.println();
     client.stop();
-    Serial.println("Client déconnecté");
+    Serial.println("Client déconnecté\n");
   }
-  
 }

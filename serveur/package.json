@@ -1,0 +1,19 @@
+{
+  "name": "serveur",
+  "version": "1.0.0",
+  "description": "Serveur qui gère les requêtes du client de Meow Time et intéragit avec le serveur sur l'ESP32",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ibrahim Elyadi",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.9.0",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "node-schedule": "^2.1.1"
+  }
+}
