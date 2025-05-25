@@ -29,15 +29,20 @@
 
 ## 🌳 Environnement
 - Serveur
-Crée un fichier `.env` à la racine du dossier `serveur/` avec le contenu suivant :
+Crée un fichier `.env` à la racine du dossier `serveur/` avec le contenu suivant : 
+```bash
 ESP32_IP=
 ESP32_PORT=
 PORT=
-Remplace les valeurs du PORT par celle que tu utilises puis marque l'addresse IP public de ton routeur pour ESP32_IP ou mais l'addresse ip locale si tu veux utiliser l'application que localement.
+JWT_SECRET=
+```
+Remplace les valeurs du PORT par celle que tu utilises puis marque l'addresse IP public de ton routeur pour ESP32_IP ou mais l'addresse ip locale si tu veux utiliser l'application que localement. Aussi choisir une clé pour les JSON web tokens.
 - ESP32
 Créer un fichier secrets.h avec :
+```bash
 const char* ssid = "VOTRESSID";
 const char* password = "VOTREPASSWORD";
+```
 et les remplacés par ceux de votre réseau.
 
 ## ⏩ Port Forwarding 

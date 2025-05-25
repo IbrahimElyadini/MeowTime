@@ -1,2 +1,4 @@
-export const SERVER_IP = 'ADDRESSE_IP_DU_SERVEUR';
-export const SERVER_PORT = 'PORT_DU_SERVEUR';
+export const SERVER_IP = 'localhost';
+export const SERVER_PORT = '5000';
+
+export const SERVER_URL = `http://${SERVER_IP}:${SERVER_PORT}`;

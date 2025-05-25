@@ -10,7 +10,10 @@ const ESP32_PORT = process.env.ESP32_PORT || 80;
 const PORT = process.env.PORT || 5020;
 
 const app = express();
-app.use(cors({ origin: '*' }));
+app.use(cors({ origin: '*',  
+  methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+ }));
 app.use(express.json());
 
 app.get('/', (req, res) => {

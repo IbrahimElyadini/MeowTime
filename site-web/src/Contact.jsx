@@ -1,6 +1,6 @@
 import './Contact.css';
 import { useState } from 'react';
-
+import { sendMessage } from './services/ServeurApi.js';
 
 function Contact() {
     const [formData, setFormData] = useState({
@@ -19,11 +19,29 @@ function Contact() {
       };
     
       // Gestion de la soumission du formulaire
-      const handleSubmit = (e) => {
+      const handleSubmit = async (e) => {
         e.preventDefault();
         console.log('Form data:', formData);
-        // fetch avec post pour envoyer les données
-        alert('Message envoyé, merci !');
+        try {
+          const response = await sendMessage(formData.name, formData.email, formData.message);
+          if (response.status === 201) {
+            console.log('Message envoyé avec succès');
+            alert('Message envoyé avec succès !');
+            setFormData({
+              name: '',
+              email: '',
+              message: '',
+            });
+          }
+          else {
+            console.error('Échec de l\'envoi du message');
+            alert('Échec de l\'envoi du message. Veuillez réessayer.');
+          }
+        }
+        catch (err) {
+          console.error('Erreur lors de l\'envoi du message :', err.message);
+          alert('Erreur réseau. Veuillez réessayer plus tard.');
+        }
       };
     
   return (

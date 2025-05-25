@@ -4,6 +4,7 @@
   "description": "Serveur qui gère les requêtes du client de Meow Time et intéragit avec le serveur sur l'ESP32",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ibrahim Elyadi",
@@ -14,6 +15,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "node-schedule": "^2.1.1"
   }
 }
