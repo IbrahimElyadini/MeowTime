@@ -1,5 +1,5 @@
 import './Contact.css';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { sendMessage } from './services/ServeurApi.js';
 
 function Contact() {
@@ -8,6 +8,9 @@ function Contact() {
         email: '',
         message: '',
       });
+      const [feedback, setFeedback] = useState('');
+      const [feedbackType, setFeedbackType] = useState('');
+      const messageRef = useRef(null);
     
       // Met à jour l'état à chaque changement dans un input
       const handleChange = (e) => {
@@ -21,26 +24,33 @@ function Contact() {
       // Gestion de la soumission du formulaire
       const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Form data:', formData);
+        setFeedback('');
+        setFeedbackType('');
         try {
           const response = await sendMessage(formData.name, formData.email, formData.message);
           if (response.status === 201) {
-            console.log('Message envoyé avec succès');
-            alert('Message envoyé avec succès !');
+            setFeedback('Message envoyé avec succès !');
+            setFeedbackType('success');
             setFormData({
               name: '',
               email: '',
               message: '',
             });
-          }
-          else {
-            console.error('Échec de l\'envoi du message');
-            alert('Échec de l\'envoi du message. Veuillez réessayer.');
+            setTimeout(() => {
+              messageRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+          } else {
+            setFeedback("Échec de l'envoi du message. Veuillez réessayer.");
+            setFeedbackType('error');
+            setTimeout(() => {
+              messageRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
           }
         }
         catch (err) {
+          setFeedback('Erreur réseau. Veuillez réessayer plus tard.');
+          setFeedbackType('error');
           console.error('Erreur lors de l\'envoi du message :', err.message);
-          alert('Erreur réseau. Veuillez réessayer plus tard.');
         }
       };
     
@@ -57,6 +67,12 @@ function Contact() {
             <p><strong>LinkedIn :</strong> <a href="https://www.linkedin.com/in/ibrahim-elyadini-a32b56267/" target="_blank" rel="noopener noreferrer">linkedin.com/in/ibrahimelyadini</a></p>
             <p><strong>GitHub :</strong> <a href="https://github.com/IbrahimElyadini" target="_blank" rel="noopener noreferrer">github.com/IbrahimElyadini</a></p>
         </div>
+
+        {feedback && (
+          <div ref={messageRef} className={`message ${feedbackType}`}>
+            {feedback}
+          </div>
+        )}
 
         <form className="contact-form" onSubmit={handleSubmit}>
           <label>

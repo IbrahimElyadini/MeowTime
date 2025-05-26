@@ -2,14 +2,11 @@
     background-color: #222;
     color: #fff;
     text-align: left;
-    padding: 20px;
-    font-size: 0.9rem;
-    position: relative;
-    bottom: 0;
-    width: 100%;
+    padding: 10px 20px;   /* réduit le padding */
+    font-size: 0.82rem;   /* réduit la taille du texte */
     position: fixed;
     left: 0;
     bottom: 0;
-    width: 100%;  
-  }
-  
+    width: 100%;
+    z-index: 100;
+}

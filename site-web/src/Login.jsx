@@ -7,6 +7,8 @@ function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [message, setMessage] = useState('');
+    const [messageType, setMessageType] = useState(''); // 'success' ou 'error'
 
     useEffect(() => {
       // Vérifie si un token est présent dans le localStorage
@@ -25,17 +27,22 @@ function Login() {
           const token = (await response.json()).token;
           console.log('Login successful!');
           window.localStorage.setItem('token', token); // Stocker le token dans le localStorage
-          alert('Connexion réussie !');
-          window.location.href = '/'; // Rediriger vers la page d'accueil
+          setMessage('Connexion réussie !');
+          setMessageType('success');
+          setTimeout(() => {
+            window.location.href = '/'; // Rediriger vers la page d'accueil
+          }, 1000); // Attendre 2 secondes avant de rediriger
         }
         else {
           console.error('Login failed');
-          alert('Échec de la connexion. Veuillez vérifier vos identifiants.');
+          setMessage('Échec de la connexion. Veuillez vérifier vos identifiants.');
+          setMessageType('error');
         }
 
       } catch (err) {
         console.error('Erreur lors de la tentative de connexion :', err.message);
-        alert('Erreur réseau. Veuillez réessayer plus tard.');    
+        setMessage('Erreur réseau. Veuillez réessayer plus tard.');
+        setMessageType('error');    
       }
     };
 
@@ -84,6 +91,11 @@ function Login() {
           </div>
           <button type="submit" className="login-button">Login</button>
         </form>
+        {message && (
+          <div className={`message ${messageType}`}>
+            {message}
+          </div>
+        )}
       </main>
     </div>  );
 }

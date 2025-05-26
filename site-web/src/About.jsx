@@ -22,6 +22,10 @@ function About() {
             <strong> Polytechnique Montréal</strong>. Ce projet combine mes passions pour les systèmes embarqués,
             l'automatisation, et bien sûr, les chats 🐾.
             </p>
+            <p>
+              J'aime relever des défis techniques et apprendre de nouvelles technologies. 
+              Je crois que l'innovation peut améliorer le quotidien, même pour nos animaux de compagnie !
+            </p>
         </section>
         </div>
     </div>

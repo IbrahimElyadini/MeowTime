@@ -35,8 +35,10 @@ ESP32_IP=
 ESP32_PORT=
 PORT=
 JWT_SECRET=
+MONGODB_URI=
+MONGODB_DB=
 ```
-Remplace les valeurs du PORT par celle que tu utilises puis marque l'addresse IP public de ton routeur pour ESP32_IP ou mais l'addresse ip locale si tu veux utiliser l'application que localement. Aussi choisir une clé pour les JSON web tokens.
+Remplace les valeurs du PORT par celle que vous utilisez puis marque l'addresse IP public de ton routeur pour ESP32_IP ou mais l'addresse ip locale si tu veux utiliser l'application que localement. Aussi choisir une clé pour les JSON web tokens. Il faut également remplacé la DB par celle que vous aurez.
 - ESP32
 Créer un fichier secrets.h avec :
 ```bash
