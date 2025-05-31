@@ -17,6 +17,8 @@ Lien de l'application : https://meow-time-front-end-2a53.vercel.app/
 - Node.js (Backend)
 - ESP32 (Microcontrôleur Wi-Fi)
 - HTTP API pour la communication
+- Deployed on Vercel (Frontend)
+- Deployed on Render (Backend)
 
 ## 🔌 Circuit ESP32
 - 1 breadboard
