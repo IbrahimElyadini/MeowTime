@@ -1,5 +1,6 @@
 #include <WiFi.h>
 #include <ESP32Servo.h>
+#include <HTTPClient.h>
 #include "secrets.h"
 // secrets.h devrait être dans le même folder et avoir deux constantes ssid et password respectif à votre réseau
 
@@ -13,6 +14,10 @@ WiFiServer server(80);  // Création du serveur sur le port 80
 
 Servo servo1;
 
+// PING VERS SERVEUR EXTERNE
+const char* pingUrl = "https://BACKENDURL/api/feeding/schedule";  //Remplacer l'url par celle du backend
+unsigned long lastPingTime = 0;
+const unsigned long pingInterval = 5 * 60 * 1000;
 
 void setup() {
   Serial.begin(115200);
@@ -86,5 +91,32 @@ void loop() {
     client.println();
     client.stop();
     Serial.println("Client déconnecté\n");
+  }
+  
+  // --- Ping périodique vers un serveur externe ---
+  if (millis() - lastPingTime > pingInterval) {
+    lastPingTime = millis();
+
+    if (WiFi.status() == WL_CONNECTED) {
+      HTTPClient http;
+      http.setTimeout(50000);
+      http.begin(pingUrl);
+
+      Serial.println("[PING] Envoi de requête au serveur externe...");
+      int httpCode = http.GET();
+
+      if (httpCode > 0) {
+        String payload = http.getString();
+        Serial.printf("[PING] Code retour: %d\n", httpCode);
+        Serial.println("[PING] Contenu :");
+        Serial.println(payload);
+      } else {
+        Serial.printf("[PING] Erreur de requête : %s\n", http.errorToString(httpCode).c_str());
+      }
+
+      http.end();
+    } else {
+      Serial.println("[PING] WiFi déconnecté. Impossible d'envoyer la requête.");
+    }
   }
 }
