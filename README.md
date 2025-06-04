@@ -1,6 +1,7 @@
 # MeowTime 🐾
 
 **MeowTime** est une application React permettant de programmer l'alimentation automatique de mon chat via une carte **ESP32**.
+Lien de l'application : https://meow-time-front-end-2a53.vercel.app/
 
 ## 🚀 Fonctionnement
 
@@ -16,6 +17,8 @@
 - Node.js (Backend)
 - ESP32 (Microcontrôleur Wi-Fi)
 - HTTP API pour la communication
+- Deployed on Vercel (Frontend)
+- Deployed on Render (Backend)
 
 ## 🔌 Circuit ESP32
 - 1 breadboard
